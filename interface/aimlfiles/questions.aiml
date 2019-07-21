@@ -1,0 +1,10 @@
+<aiml version="1.0.1" encoding="UTF-8">
+   <category>
+      <pattern>*</pattern>
+      <template>
+        <random>
+         <li><get name="title"></get> Release date <get name="date"></get></li>
+         </random>
+      </template>
+   </category>
+</aiml>

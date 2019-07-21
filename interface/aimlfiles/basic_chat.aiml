@@ -1,0 +1,111 @@
+<aiml version="1.0.4" encoding="UTF-8">
+<!-- basic_chat.aiml -->
+
+    <category>
+        <pattern>HELLO</pattern>
+        <template>
+          <random>
+            <li><srai>MY NAME IS</srai></li>
+            <li>Hi, How is it going?</li>
+            <li>Hi,I'm <bot name="botname"/></li>
+            <li>What's up!</li>
+          </random>
+        </template>
+
+    </category>
+    <category>
+     <pattern>_ Hello *</pattern>
+        <template><srai>HELLO</srai></template>
+        </category>
+        <category>
+
+        <pattern>Hello *</pattern>
+        <template><srai>HELLO</srai></template>
+    </category>
+     <category>
+
+        <pattern>Hello *</pattern>
+        <template><srai>HELLO</srai></template>
+    </category>
+     <category>
+     <pattern>HI</pattern>
+        <template><srai>HELLO</srai></template>
+
+    </category>
+
+    <category>
+        <pattern>MY NAME IS _</pattern>
+        <template>
+            <random>
+            <li>Hello <set name="username"><star/>! </set></li>
+            <li>What's up <set name="username"><star/>! </set></li>
+            <li>Hi <set name="username"><star/>! </set>how can I help</li>
+            </random>
+        </template>
+    </category>
+     <category>
+        <pattern>WHO ARE YOU</pattern>
+        <template><srai>WHAT ARE YOU</srai></template>
+    </category>
+    <category>
+
+        <pattern>WHAT ARE YOU</pattern>
+        <template>
+            <random>
+                <li>I'm a Chatbot, <bot name="botname"/></li>
+                <li>Hi, I'm <bot name="botname"/></li>
+            </random>
+        </template>
+    </category>
+
+    <category>
+          <pattern>WHAT IS YOUR NAME</pattern>
+        <template><srai>WHAT ARE YOU</srai></template>
+    </category>
+    <category>
+        <pattern>BYE</pattern>
+        <template>
+            <random>
+                <li>Thanks for your conversation!</li>
+                <li>Bye, for now</li>
+            </random>
+        </template>
+        </category>
+
+        <category>
+        <pattern>* BYE *</pattern>
+        <template>
+           <srai>BYE</srai>
+        </template>
+        </category>
+        <category>
+
+        <pattern>_ BYE *</pattern>
+        <template>
+            <srai>BYE</srai>
+        </template>
+    </category>
+    <category>
+
+    <pattern>YOUR A *</pattern>
+    <template>I presume you mean "you are a ..." <srai>YOU ARE A <star/></srai></template>
+    </category>
+    <category>
+
+    <pattern>YOU ARE A *</pattern>
+    <template><star/></template>
+    </category>
+
+    <category>
+        <pattern>*</pattern>
+        <template>
+            <random>
+                <li>"<star/>"?what?</li>
+                <li>Ohkay</li>
+                <li>Can you repeat that for me</li>
+                <li>I think I need to work hard on that</li>
+                <li>Ohh seems like you trick me! </li>
+            </random>
+        </template>
+    </category>
+</aiml>

@@ -1,0 +1,102 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>test</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../static/build/botui.min.css">
+  <link rel="stylesheet" href="../static/build/botui-theme-default.css">
+</head>
+
+<body>
+  <div class="botui-app-container" id="hello-world">
+    <bot-ui style=";background: rgba(51, 51, 51, 0.05);"></bot-ui>
+    <!-- <input type="text" name="" id="myMsg"  placeholder="Say Something...." value=""> -->
+  </div>
+  <script src="https://cdn.jsdelivr.net/vue/2.0.5/vue.min.js"></script>
+  <script src="../static/build/botui.js"></script>
+  <script>
+    var botui = new BotUI('hello-world');
+    botui.message.add({
+  content: 'Hi! I\'m mbot. '
+});
+    function input() {
+      botui.action.text({ // show 'text' action
+        action: {
+          placeholder: 'Say Something',
+          value: ''
+        }
+      }).then(function(res) {
+        botui.message.add({
+          loading: true
+        }).then(function(index) {
+          // do some stuff like ajax, etc.
+          $.ajax({
+            type: "GET",
+            url: "/python/",
+            cache: false,
+            dataType: "json",
+            data: {
+              msg: res.value
+            },
+            success: function(data) {
+
+              botui.message.update(index,{
+                loading:false,
+                content: data.message
+              });
+              botui.message.add({
+            content:"You might be having "+data.disease
+          });
+
+
+              input();
+            }
+          });
+
+        });
+
+      });
+    }
+    input();
+  </script>
+
+</body>
+
+</html>
+<script>
+  // CSRF code
+  function getCookie(name) {
+    var cookieValue = null;
+    var i = 0;
+    if (document.cookie && document.cookie !== '') {
+      var cookies = document.cookie.split(';');
+      for (i; i < cookies.length; i++) {
+        var cookie = jQuery.trim(cookies[i]);
+        // Does this cookie string begin with the name we want?
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+  var csrftoken = getCookie('csrftoken');
+
+  function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+  }
+  $.ajaxSetup({
+    crossDomain: false, // obviates need for sameOrigin test
+    beforeSend: function(xhr, settings) {
+      if (!csrfSafeMethod(settings.type)) {
+        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+      }
+    }
+  });
+</script>
